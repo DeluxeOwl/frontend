@@ -1,65 +1,61 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Layout from "../components/layout";
+import SearchBar from "../components/searchbar";
+import Badge from "react-bootstrap/Badge";
+import CardProdus from "../components/card";
 
+import styles from "../components/index.module.scss";
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+    <Layout>
+      <SearchBar />
+      <div className={styles.mainwrapper}>
+        <h1>
+          Anunturi <Badge variant="secondary">Noi</Badge>
         </h1>
+      </div>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      <div className={styles.grid}>
+        <CardProdus
+          text="Laptop asus"
+          imagine="/laptop.jpg"
+          data={new Date()}
+          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
+          contact={"+40774041350"}
+          pret={1500}
+        />
+        <CardProdus
+          text="Laptop asus"
+          imagine="/laptop.jpg"
+          data={new Date()}
+          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
+          contact={"+40774041350"}
+          pret={1500}
+        />
+        <CardProdus
+          text="Laptop asus"
+          imagine="/laptop.jpg"
+          data={new Date()}
+          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
+          contact={"+40774041350"}
+          pret={1500}
+        />
+        <CardProdus
+          text="Laptop asus"
+          imagine="/laptop.jpg"
+          data={new Date()}
+          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
+          contact={"+40774041350"}
+          pret={1500}
+        />
+        <CardProdus
+          text="Laptop asus"
+          imagine="/laptop.jpg"
+          data={new Date()}
+          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
+          contact={"+40774041350"}
+          pret={1500}
+        />
+      </div>
+    </Layout>
+  );
 }
