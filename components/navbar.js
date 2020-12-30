@@ -23,6 +23,8 @@ export default function MainNavbar(props) {
   function adaugaAnunt() {
     if (!isAuthenticated()) {
       router.push("/login");
+    } else {
+      router.push("/anuntnou");
     }
   }
 

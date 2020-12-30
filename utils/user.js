@@ -2,7 +2,7 @@ function getUser() {
   if (typeof localStorage === "undefined") {
     return false;
   }
-  return JSON.parse(localStorage.getItem("user"));
+  return localStorage.getItem("user");
 }
 
 export default getUser;

@@ -16,39 +16,7 @@ export default function Home() {
 
       <div className={styles.grid}>
         <CardProdus
-          text="Laptop asus"
-          imagine="/laptop.jpg"
-          data={new Date()}
-          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
-          contact={"+40774041350"}
-          pret={1500}
-        />
-        <CardProdus
-          text="Laptop asus"
-          imagine="/laptop.jpg"
-          data={new Date()}
-          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
-          contact={"+40774041350"}
-          pret={1500}
-        />
-        <CardProdus
-          text="Laptop asus"
-          imagine="/laptop.jpg"
-          data={new Date()}
-          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
-          contact={"+40774041350"}
-          pret={1500}
-        />
-        <CardProdus
-          text="Laptop asus"
-          imagine="/laptop.jpg"
-          data={new Date()}
-          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
-          contact={"+40774041350"}
-          pret={1500}
-        />
-        <CardProdus
-          text="Laptop asus"
+          titlu="Laptop asus"
           imagine="/laptop.jpg"
           data={new Date()}
           text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."

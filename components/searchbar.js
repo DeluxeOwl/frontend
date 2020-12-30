@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 
 import styles from "./searchbar.module.scss";
+
+import axios from "axios";
+
 export default function SearchBar(props) {
   const [produs, setProdus] = useState("");
   const [categorie, setCategorie] = useState("Categorie");
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:1337/categories/")
+      .then((res) => setCategories(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   function handleProdusChange(e) {
     setProdus(e.target.value);
@@ -47,9 +59,11 @@ export default function SearchBar(props) {
             >
               {/* TODO: make this dinamically from backend */}
               <option value="Categorie">Categorie</option>
-              <option value="One">One</option>
-              <option value="Two">Two</option>
-              <option value="Three">Three</option>
+              {categories.map((categorie, i) => (
+                <option key={i} value={categorie.Nume}>
+                  {categorie.Nume}
+                </option>
+              ))}
             </Form.Control>
           </Col>
           <Col>
