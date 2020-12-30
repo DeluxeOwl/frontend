@@ -5,7 +5,7 @@ export default function Layout(props) {
   return (
     <div className={styles.mainwrapper}>
       <Head>
-        <title>Create Next App</title>
+        <title>{props.title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainNavbar />

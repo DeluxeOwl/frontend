@@ -3,10 +3,29 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import isAuthenticated from "../utils/auth";
 
 import styles from "./navbar.module.scss";
 
+import { useRouter } from "next/router";
+
 export default function MainNavbar(props) {
+  const router = useRouter();
+
+  function logOut() {
+    localStorage.removeItem("auth");
+    localStorage.removeItem("user");
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  }
+
+  function adaugaAnunt() {
+    if (!isAuthenticated()) {
+      router.push("/login");
+    }
+  }
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
       <Link href="/" passHref>
@@ -18,20 +37,31 @@ export default function MainNavbar(props) {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">
           <NavDropdown title="Contul meu" id="collasible-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            {isAuthenticated() ? (
+              <>
+                <NavDropdown.Item onClick={logOut}>Log out</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Anunturile mele
+                </NavDropdown.Item>
+              </>
+            ) : (
+              <>
+                <Link href="/login" passHref>
+                  <NavDropdown.Item href="#action/3.1">Login</NavDropdown.Item>
+                </Link>
+                <Link href="/register" passHref>
+                  <NavDropdown.Item>Inregistreaza-te</NavDropdown.Item>
+                </Link>
+              </>
+            )}
+
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.4">Cosul meu</NavDropdown.Item>
           </NavDropdown>
         </Nav>
-        <Link href="/" passHref>
-          <Button variant="outline-success">Adauga un anunt</Button>
-        </Link>
+        <Button variant="outline-success" onClick={adaugaAnunt}>
+          Adauga un anunt
+        </Button>
       </Navbar.Collapse>
     </Navbar>
   );

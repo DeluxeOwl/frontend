@@ -6,7 +6,7 @@ import CardProdus from "../components/card";
 import styles from "../components/index.module.scss";
 export default function Home() {
   return (
-    <Layout>
+    <Layout title="Bun venit">
       <SearchBar />
       <div className={styles.mainwrapper}>
         <h1>
