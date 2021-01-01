@@ -26,8 +26,6 @@ export default function AnuntNou() {
   }
   function handleCategorie(e) {
     setCategorie(e.target.value);
-    console.log(e.target.value);
-    console.log(Categorie);
   }
   function handleDescriere(e) {
     setDescriere(e.target.value);

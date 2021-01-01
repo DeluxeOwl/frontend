@@ -37,6 +37,7 @@ export default function Home() {
         anunt.nume_proprietar === nume_proprietar ? (
           <CardProdus
             key={anunt.id}
+            id={anunt.id}
             titlu={anunt.nume}
             imagine={`http://localhost:1337${anunt.url_imagine}`}
             data={anunt.created_at}

@@ -1,5 +1,5 @@
 import Card from "react-bootstrap/Card";
-
+import Link from "next/link";
 import Moment from "react-moment";
 import "moment-timezone";
 import "moment/locale/ro";
@@ -12,6 +12,7 @@ export default function CardProdus({
   imagine,
   contact,
   pret,
+  id,
 }) {
   return (
     <Card style={{ width: "22rem" }} border="dark">
@@ -27,7 +28,9 @@ export default function CardProdus({
         <Card.Text>
           {text.length > 150 ? text.slice(0, 146) + "..." : text}
         </Card.Text>
-        <Button variant="primary">Vezi anunt</Button>
+        <Link href={`/anunt/${id}`}>
+          <Button variant="primary">Vezi anunt</Button>
+        </Link>
       </Card.Body>
       <Card.Footer>
         <img

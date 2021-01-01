@@ -18,8 +18,6 @@ export default function Home() {
 
   const [filter, setFilter] = useState(false);
 
-  console.log(anunturi);
-
   useEffect(() => {
     axios
       .get("http://localhost:1337/products?_sort=created_at")
@@ -37,6 +35,7 @@ export default function Home() {
     if (!filter) {
       return anunturi.map((anunt) => (
         <CardProdus
+          id={anunt.id}
           key={anunt.id}
           titlu={anunt.nume}
           imagine={`http://localhost:1337${anunt.url_imagine}`}
@@ -52,6 +51,7 @@ export default function Home() {
           anunt.categorie === categorie ? (
             <CardProdus
               key={anunt.id}
+              id={anunt.id}
               titlu={anunt.nume}
               imagine={`http://localhost:1337${anunt.url_imagine}`}
               data={anunt.created_at}
@@ -65,6 +65,7 @@ export default function Home() {
         return anunturi.map((anunt) =>
           anunt.nume.includes(produs) || anunt.descriere.includes(produs) ? (
             <CardProdus
+              id={anunt.id}
               key={anunt.id}
               titlu={anunt.nume}
               imagine={`http://localhost:1337${anunt.url_imagine}`}
