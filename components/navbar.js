@@ -42,9 +42,9 @@ export default function MainNavbar(props) {
             {isAuthenticated() ? (
               <>
                 <NavDropdown.Item onClick={logOut}>Log out</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Anunturile mele
-                </NavDropdown.Item>
+                <Link href="/anunturilemele" passHref>
+                  <NavDropdown.Item>Anunturile mele</NavDropdown.Item>
+                </Link>
               </>
             ) : (
               <>
@@ -58,7 +58,7 @@ export default function MainNavbar(props) {
             )}
 
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">Cosul meu</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.4">Favorite</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Button variant="outline-success" onClick={adaugaAnunt}>

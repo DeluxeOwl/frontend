@@ -7,12 +7,16 @@ import styles from "./searchbar.module.scss";
 
 import axios from "axios";
 
-export default function SearchBar(props) {
-  const [produs, setProdus] = useState("");
-  const [categorie, setCategorie] = useState("Categorie");
-
-  const [categories, setCategories] = useState([]);
-
+export default function SearchBar({
+  produs,
+  setProdus,
+  categorie,
+  setCategorie,
+  categories,
+  setCategories,
+  filter,
+  setFilter,
+}) {
   useEffect(() => {
     axios
       .get("http://localhost:1337/categories/")
@@ -21,14 +25,24 @@ export default function SearchBar(props) {
   }, []);
 
   function handleProdusChange(e) {
-    setProdus(e.target.value);
+    setProdus((produs) => e.target.value);
+    console.log(produs);
   }
   function handleCategorieChange(e) {
-    setCategorie(e.target.value);
+    setCategorie((categorie) => e.target.value);
+  }
+  function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
   }
   function handleSearch(e) {
     e.preventDefault();
     console.log(produs, categorie);
+
+    if (isEmptyOrSpaces(produs) && categorie === "Categorie") {
+      setFilter(false);
+    } else {
+      setFilter(true);
+    }
   }
 
   return (

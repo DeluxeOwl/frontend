@@ -14,7 +14,7 @@ export default function CardProdus({
   pret,
 }) {
   return (
-    <Card style={{ width: "18rem" }} border="dark">
+    <Card style={{ width: "22rem" }} border="dark">
       <Card.Header>
         <h3>{pret} RON</h3>
       </Card.Header>
@@ -22,9 +22,7 @@ export default function CardProdus({
       <Card.Body>
         <Card.Title>{titlu}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
-          <Moment fromNow>
-            <Moment date={data} />
-          </Moment>
+          <Moment fromNow>{data}</Moment>
         </Card.Subtitle>
         <Card.Text>
           {text.length > 150 ? text.slice(0, 146) + "..." : text}

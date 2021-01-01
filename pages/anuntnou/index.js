@@ -18,11 +18,16 @@ export default function AnuntNou() {
   const [Pret, setPret] = useState("");
   const [Poza, setPoza] = useState(null);
 
+  const [displayAlert, setDisplayAlert] = useState(null);
+  const [alertText, setAlertText] = useState("");
+
   function handleNume(e) {
     setNume(e.target.value);
   }
   function handleCategorie(e) {
     setCategorie(e.target.value);
+    console.log(e.target.value);
+    console.log(Categorie);
   }
   function handleDescriere(e) {
     setDescriere(e.target.value);
@@ -56,6 +61,7 @@ export default function AnuntNou() {
       })
       .then((res) => {
         let data = {
+          nume_proprietar: JSON.parse(localStorage.getItem("user")).username,
           nume: Nume,
           descriere: Descriere,
           pret: Pret,
@@ -68,8 +74,22 @@ export default function AnuntNou() {
           .post("http://localhost:1337/products", data, {
             headers: { Authorization: `Bearer ${token}` },
           })
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err));
+          .then((res) => {
+            setDisplayAlert("success");
+            setAlertText("Ai adaugat anuntul cu success!");
+
+            setTimeout(() => {
+              setDisplayAlert(null);
+            }, 3000);
+          })
+          .catch((err) => {
+            setDisplayAlert("danger");
+            setAlertText("A aparut o eroare");
+
+            setTimeout(() => {
+              setDisplayAlert(null);
+            }, 3000);
+          });
       })
       .catch((err) => console.log(err));
   }
@@ -154,6 +174,9 @@ export default function AnuntNou() {
             Adauga
           </Button>
         </Form>
+        {displayAlert ? (
+          <Alert variant={displayAlert}>{alertText}</Alert>
+        ) : null}
       </div>
     </Layout>
   );

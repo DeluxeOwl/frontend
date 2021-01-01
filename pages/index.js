@@ -4,26 +4,100 @@ import Badge from "react-bootstrap/Badge";
 import CardProdus from "../components/card";
 
 import styles from "../components/index.module.scss";
+
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 export default function Home() {
+  const [anunturi, setAnunturi] = useState(null);
+
+  const [produs, setProdus] = useState("");
+  const [categorie, setCategorie] = useState("Categorie");
+
+  const [categories, setCategories] = useState([]);
+
+  const [filter, setFilter] = useState(false);
+
+  console.log(anunturi);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:1337/products?_sort=created_at")
+      .then((res) => setAnunturi(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+  }
+  function showAnunturi() {
+    if (!anunturi) {
+      return null;
+    }
+    if (!filter) {
+      return anunturi.map((anunt) => (
+        <CardProdus
+          key={anunt.id}
+          titlu={anunt.nume}
+          imagine={`http://localhost:1337${anunt.url_imagine}`}
+          data={anunt.created_at}
+          text={anunt.descriere}
+          contact={anunt.contact}
+          pret={anunt.pret}
+        />
+      ));
+    } else {
+      if (isEmptyOrSpaces(produs)) {
+        return anunturi.map((anunt) =>
+          anunt.categorie === categorie ? (
+            <CardProdus
+              key={anunt.id}
+              titlu={anunt.nume}
+              imagine={`http://localhost:1337${anunt.url_imagine}`}
+              data={anunt.created_at}
+              text={anunt.descriere}
+              contact={anunt.contact}
+              pret={anunt.pret}
+            />
+          ) : null
+        );
+      } else if (categorie === "Categorie") {
+        return anunturi.map((anunt) =>
+          anunt.nume.includes(produs) || anunt.descriere.includes(produs) ? (
+            <CardProdus
+              key={anunt.id}
+              titlu={anunt.nume}
+              imagine={`http://localhost:1337${anunt.url_imagine}`}
+              data={anunt.created_at}
+              text={anunt.descriere}
+              contact={anunt.contact}
+              pret={anunt.pret}
+            />
+          ) : null
+        );
+      }
+    }
+  }
+
   return (
     <Layout title="Bun venit">
-      <SearchBar />
+      <SearchBar
+        produs={produs}
+        setProdus={setProdus}
+        categorie={categorie}
+        setCategorie={setCategorie}
+        categories={categories}
+        setCategories={setCategories}
+        filter={filter}
+        setFilter={setFilter}
+      />
       <div className={styles.mainwrapper}>
         <h1>
           Anunturi <Badge variant="secondary">Noi</Badge>
         </h1>
       </div>
 
-      <div className={styles.grid}>
-        <CardProdus
-          titlu="Laptop asus"
-          imagine="/laptop.jpg"
-          data={new Date()}
-          text="Lorem ipsum dolor sit amet, quem nibh legendos vel cu, no usu unum intellegat. Vix ne habeo dicat expetenda. Sed diam paulo conclusionemque ne, mel ubique possit graecis ne. Alia vivendo interpretaris et mea, decore propriae mel ea."
-          contact={"+40774041350"}
-          pret={1500}
-        />
-      </div>
+      <div className={styles.grid}>{showAnunturi()}</div>
     </Layout>
   );
 }
