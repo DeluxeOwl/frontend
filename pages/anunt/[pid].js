@@ -3,6 +3,8 @@ import Alert from "react-bootstrap/Alert";
 import Badge from "react-bootstrap/Badge";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -14,6 +16,28 @@ const Post = () => {
   const { pid } = router.query;
 
   const [anunt, setAnunt] = useState(null);
+
+  let nume_proprietar = null;
+  let token = null;
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:1337/products/${pid}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => router.push("/anunturilemele"))
+      .catch((err) => console.log(err));
+  };
+
+  if (typeof localStorage !== "undefined") {
+    nume_proprietar = JSON.parse(localStorage.getItem("user")).username;
+    token = localStorage.getItem("auth");
+  }
 
   useEffect(() => {
     axios
@@ -35,6 +59,27 @@ const Post = () => {
             <Breadcrumb.Item href="/">Anunturi</Breadcrumb.Item>
             <Breadcrumb.Item active>{anunt.nume}</Breadcrumb.Item>
           </Breadcrumb>
+          {anunt.nume_proprietar === nume_proprietar ? (
+            <Button variant="danger" onClick={handleShow}>
+              Sterge anunt
+            </Button>
+          ) : null}
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Sterge anuntul</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Esti sigur ca dorest sa stergi anuntul {anunt.nume}?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Nu
+              </Button>
+              <Button variant="danger" onClick={handleDelete}>
+                Da
+              </Button>
+            </Modal.Footer>
+          </Modal>
           <h1>
             <Badge variant="secondary" large>
               {anunt.nume}
@@ -43,7 +88,7 @@ const Post = () => {
           <img
             src={`http://localhost:1337${anunt.url_imagine}`}
             alt={anunt.nume}
-            layout="fill"
+            style={{ maxHeight: "900px", maxWidth: "900px" }}
           />
           <Card>
             <Card.Header>
