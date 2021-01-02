@@ -1,6 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Link from "next/link";
 import Moment from "react-moment";
+import FavouriteButton from "./favouriteButton";
 import "moment-timezone";
 import "moment/locale/ro";
 
@@ -17,7 +18,16 @@ export default function CardProdus({
   return (
     <Card style={{ width: "22rem" }} border="dark">
       <Card.Header>
-        <h3>{pret} RON</h3>
+        <div
+          style={{
+            display: "flex",
+            backgroundColor: "#f7f7f7",
+            justifyContent: "space-between",
+          }}
+        >
+          <h3 style={{ display: "inline-block" }}>{pret} RON</h3>
+          <FavouriteButton id={id} />
+        </div>
       </Card.Header>
       <Card.Img variant="top" src={imagine} width="100px" height="286px" />
       <Card.Body>

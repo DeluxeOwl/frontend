@@ -41,7 +41,12 @@ export default function AnuntNou() {
   }
   let token = null;
   if (typeof localStorage !== "undefined") {
-    token = localStorage.getItem("auth");
+    if (
+      localStorage.getItem("auth") !== null &&
+      localStorage.getItem("user") !== null
+    ) {
+      token = localStorage.getItem("auth");
+    }
   }
 
   function handleSubmit(e) {

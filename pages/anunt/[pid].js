@@ -35,8 +35,13 @@ const Post = () => {
   };
 
   if (typeof localStorage !== "undefined") {
-    nume_proprietar = JSON.parse(localStorage.getItem("user")).username;
-    token = localStorage.getItem("auth");
+    if (
+      localStorage.getItem("auth") !== null &&
+      localStorage.getItem("user") !== null
+    ) {
+      nume_proprietar = JSON.parse(localStorage.getItem("user")).username;
+      token = localStorage.getItem("auth");
+    }
   }
 
   useEffect(() => {

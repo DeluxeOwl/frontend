@@ -49,7 +49,7 @@ export default function MainNavbar(props) {
             ) : (
               <>
                 <Link href="/login" passHref>
-                  <NavDropdown.Item href="#action/3.1">Login</NavDropdown.Item>
+                  <NavDropdown.Item>Login</NavDropdown.Item>
                 </Link>
                 <Link href="/register" passHref>
                   <NavDropdown.Item>Inregistreaza-te</NavDropdown.Item>
@@ -58,7 +58,7 @@ export default function MainNavbar(props) {
             )}
 
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">Favorite</NavDropdown.Item>
+            <NavDropdown.Item href="/favorite">Favorite</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Button variant="outline-success" onClick={adaugaAnunt}>

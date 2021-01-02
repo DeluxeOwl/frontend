@@ -9,14 +9,17 @@ import axios from "axios";
 
 export default function Home() {
   const [anunturi, setAnunturi] = useState(null);
+  const [anunturiFav, setAnunturiFav] = useState(null);
   const [noAnunturi, setNoAnunturi] = useState(false);
-  let nume_proprietar = null;
 
+  let token = null;
+  let nume_proprietar = null;
   if (typeof localStorage !== "undefined") {
     if (
       localStorage.getItem("auth") !== null &&
       localStorage.getItem("user") !== null
     ) {
+      token = localStorage.getItem("auth");
       nume_proprietar = JSON.parse(localStorage.getItem("user")).username;
     }
   }
@@ -27,19 +30,32 @@ export default function Home() {
       .then((res) => setAnunturi(res.data))
       .catch((err) => console.log(err));
   }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:1337/favorites")
+      .then((res) =>
+        setAnunturiFav(
+          res.data
+            .filter((anunt) => anunt.user.nume === nume_proprietar)
+            .map((anunt) => anunt.user.post_favorit)
+        )
+      )
+      .catch((err) => console.log(err));
+  }, []);
 
   function showAnunturi() {
-    if (!anunturi) {
+    if (anunturiFav === null || anunturiFav.length === 0) {
       return (
         <div className={styles.mainwrapper}>
           <h1>
-            Anunturile <Badge variant="primary">postate de mine</Badge>
+            <Badge variant="danger">Nu ai anunturi favorite</Badge>
           </h1>
         </div>
       );
     } else {
-      let anunturiToShow = anunturi.map((anunt) =>
-        anunt.nume_proprietar === nume_proprietar ? (
+      return anunturi
+        .filter((fav) => anunturiFav.includes(fav.id))
+        .map((anunt) => (
           <CardProdus
             key={anunt.id}
             id={anunt.id}
@@ -50,10 +66,7 @@ export default function Home() {
             contact={anunt.contact}
             pret={anunt.pret}
           />
-        ) : null
-      );
-
-      return anunturiToShow;
+        ));
     }
   }
 
@@ -61,7 +74,7 @@ export default function Home() {
     <Layout title="Bun venit">
       <div className={styles.mainwrapper}>
         <h1>
-          Anunturile <Badge variant="primary">postate de mine</Badge>
+          Anunturile mele <Badge variant="primary">favorite ❤</Badge>
         </h1>
       </div>
 
