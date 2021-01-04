@@ -17,6 +17,7 @@
     "react-bootstrap": "^1.4.0",
     "react-dom": "17.0.1",
     "react-moment": "^1.1.1",
+    "react-quiz-component": "^0.3.8",
     "sass": "^1.30.0",
     "use-force-update": "^1.0.7"
   }
